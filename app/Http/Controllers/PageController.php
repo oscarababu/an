@@ -92,6 +92,7 @@ class PageController extends Controller
     }
 
     public function update_page_data(Request $request){
+       
             $g = Pages::find($request->id);
             $g->page = $request->page;
             $g->top_link = $request->top_link;
@@ -110,12 +111,33 @@ class PageController extends Controller
 
     }
 
+    public function fetch_edit_page_data(Request $request){
+        $res = Pages::find($request->page_id);
+        if($res->count() > 0){
+            return $res;
+        }else{
+            return array('status'=>0);
+        }   
+    }
+
+    public function delete_page(Request $request){
+        if($request->curr_status ==1){
+            $up = 0;
+        }else{
+            $up = 1;
+        }
+        $p = Pages::find($request->id);
+        $p->status = $up;
+        $p->save();
+        return array('status'=>1);
+    }
+
     public function new_page(Request $request){
 
         $chk = Pages::select('id')->where('page',$request->page)->where('status',1)->get();
 
         if($chk->count() ==0){
-            $res_page_order = Pages::select('id','page_order')->limit(1)->where('type',$request->type)->get();
+            $res_page_order = Pages::select('id','page_order')->orderBy('id','DESC')->limit(1)->where('type',$request->type)->get();
             if($res_page_order->count() > 0){
                 foreach($res_page_order as $val_page_order){
                     $highest_page_order = $val_page_order->page_order;

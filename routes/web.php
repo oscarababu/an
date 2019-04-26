@@ -11,15 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
 
-Route::get('/gallery', 'GalleryController@index');
 
-Route::get('/item/{page}/{item}', 'GalleryController@item');
+Route::get('/', 'HomeController@index');
 
-Route::get('/info', 'InfoController@page');
+Route::get('/gallery/{page}', 'GalleryController@index');
+
+Route::get('/item/{page}/{pagex}/{item}', 'GalleryController@item');
+
+Route::get('/information/{page}', 'InfoController@page');
 
 Route::get('/login', 'InfoController@login');
 
@@ -29,7 +29,11 @@ Route::post('/upload_test', 'AdminController@upload_test');
 
 Route::post('/create_gallery_item', 'GalleryController@create_gallery_item');
 
+Route::post('/create_info_item', 'InfoController@create_info_item');
+
 Route::post('/save_gallery_item_image', 'GalleryController@save_gallery_item_image');
+
+Route::post('/save_gallery_item_thumbnail', 'GalleryController@save_gallery_item_thumbnail');
 
 Route::post('/fetch_first_item_image', 'GalleryController@fetch_first_item_image');
 
@@ -45,22 +49,20 @@ Route::post('/new_page', 'PageController@new_page');
 
 Route::post('/update_page_chk_blk', 'PageController@update_page_chk_blk');
 
+Route::post('/fetch_edit_page_data', 'PageController@fetch_edit_page_data');
 
+Route::post('/delete_page', 'PageController@delete_page');
 
+Route::get('/items_reports', 'AdminController@items_reports');
 
-
-
-
-
-
-
-
-
-
-
-
+Route::get('/new_information_page', 'AdminController@new_information_page');
 
 Route::get('/image_management/{id}', 'AdminController@image_management');
+
+Route::get('/thumbnail_management/{id}', 'AdminController@thumbnail_management');
+
+
+
 
 
 

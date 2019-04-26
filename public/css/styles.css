@@ -129,6 +129,7 @@ html, body {
     float:left;
     margin:5px;
     cursor:pointer;
+    position:relative;
 }
 
 .thumb-nail img{
@@ -154,7 +155,21 @@ html, body {
 	background-image:url('../images/plus.png');
 	right:10px;
 	top:10px;
-	cursor:pointer;
+    cursor:pointer;
+    display:none;
+}
+
+.title_tag{
+	width: 96.5%;
+	height:30px;
+	position: absolute;
+	bottom:15px;
+	text-align: center;
+	padding:12px;
+	color:black;
+    display:none;
+    font-weight:bold;
+    font-size:14px;
 }
 
 .cls_slide{
@@ -189,20 +204,54 @@ html, body {
 .info_linx{
     background-image:url('../images/opacity.png');
     width:380px;
-    height: 300px;
+    height: 190px;
     right:40px;
-    top:60px;
+    top:55px;
     position:absolute;
 	
 }
 
 .info_linx li{
     list-style: none;
-    margin:10px;
+    margin-top:10px;
+    margin-right:10px;
+    margin-left:-25px;
+    margin-bottom:10px;
 }
 
+.info_linx a{
+    color: black;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.info_linx a:hover{
+    color: black;
+    font-weight: bold;
+    text-decoration:underline;
+}
+.slider_no{
+    font-size:20px;
+    margin-top:-25px;
+}
+.this_project_ttl{
+    
+}
 .slider_controls{
-	height: 60px;
+    height: 40px;
+    border-top:3px solid black;
+    margin-left:4px;
+    margin-top:-25px;
+    display:block;
+    padding-top:20px;
+}
+.this_project_desc{
+    font-size: 15px;
+    text-align:justify;
+    height:auto;
+    padding:5px;
+    width:98%;
+    margin-top:-20px;
 }
 .forward{
 	width: 30px;
@@ -226,8 +275,13 @@ html, body {
 }
 
 .tab_ui{
-	/* display:none; */
+	 display:none; 
 }
+
+#btn_edit_page{
+    display:none;
+}
+
 
 .ins_tabs{
 	width: 16.5%;

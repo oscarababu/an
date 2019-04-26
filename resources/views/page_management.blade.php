@@ -84,10 +84,10 @@
         <div class="row">
             <div class="col-md-12 ">
                 <div class='tabs'>
-                    <div class='ins_tabs2 tabb' id="gallery_mng" >
+                    <div class='ins_tabs2 tabb m-2' id="gallery_mng" >
                             Gallery Pages
                         </div>
-                        <div class='ins_tabs2 tabb'  id="info_mng" >
+                        <div class='ins_tabs2 tabb m-2'  id="info_mng" >
                             Information Pages
                         </div>
                 </div>        
@@ -97,14 +97,14 @@
       <div class="row">
             <div class="col-md-12 ">
 
-                    <div style='border:solid 1px red' class='hold_gallery_table tab_ui col-md-12 ' id='gallery_mng_ui' >
+                    <div class='hold_gallery_table tab_ui col-md-12 mb-5' id='gallery_mng_ui' >
                    
                     <table class="table" id='pages_report'>
                         
                         </table>
                     </div>
                     
-                    <div style='border:solid 1px red' class='hold_information_table tab_ui col-md-12 ' id='info_mng_ui'>
+                    <div class='hold_information_table tab_ui col-md-12 mb-5' id='info_mng_ui'>
                 
                     <table class="table" id='info_pages_report'>
                         

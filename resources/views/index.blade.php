@@ -2,26 +2,18 @@
         <div class="full-height">
                 <img src="images/1495129626_ashantistool.jpg" />
                 <div class="in-page-wrapper">
-                        <a href="{{ url('/gallery') }}">
-                                <div class="in-page-link">
-                                        <p>RECENT ACQUISITION</p>
-                                </div>
-                        </a>
-                        <a href="{{ url('/gallery') }}">
-                                <div class="in-page-link">
-                                        <p>ARCHIVES</p>
-                                </div>
-                        </a>
-                        <a href="{{ url('/gallery') }}">
-                                <div class="in-page-link">
-                                        <p>FIELD PHOTOGRAPHY</p>
-                                </div>
-                        </a>
-                        <a href="{{ url('/info') }}">
-                                <div class="in-page-link">
-                                        <p>INFORMATION</p>
-                                </div>
-                        </a>
+                        @if ($links)
+                                @foreach($links as $val)
+                                
+                                <a href="{{ url('/' . strtolower($val->type) . '/' . strtolower(str_replace(' ', '-',$val->page))) }}">
+                                        <div class="in-page-link">
+                                                <p>{{$val->page}}</p>
+                                        </div>
+                                </a>
+
+                                @endforeach
+                        @endif
+                        
                 </div>
         </div>
 

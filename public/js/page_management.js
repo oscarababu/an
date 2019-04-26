@@ -4,9 +4,8 @@ $(function () {
     var LOCAL_URL = 'http://127.0.0.1:8000/';
 
     populate_page_table();
-
-
     $("#gallery_mng_ui").show();
+    $("#gallery_mng").css({"background":"#f7f7f7"});
 
     $(".ins_tabs").click(function(){
 		var id = $(this).attr('id');
@@ -97,9 +96,15 @@ $(function () {
             data:{page:page,id:id,top_link:top_link,home_link:home_link,in_page:in_page,type:type}
           }).then(function(res){
             
-            var json = JSON.parse(res.data);
+            var json = res.data;
+            
             if(json.status == 1){
-                $('.msg').html("<h3 style='color:green'>"+page+" Successfully Edited</h3>");
+              $(".msg").html(
+                "<div class='alert alert-success' role='alert'>"+
+                "Success: "+page+" Edited"+
+                "</div>"
+              );
+                
                 populate_page_table();
                 $("#btn_create_new_page").show();
                 $("#btn_edit_page").hide();
@@ -108,7 +113,9 @@ $(function () {
                 $("#chk_top_link").attr("checked", false);
                 $("#chk_home_link").attr("checked", false);
                 $("#chk_in_page_link").attr("checked", false);
+                
             }
+            
         }).catch(function(err){
             console.log(err);
           }); 
@@ -132,11 +139,75 @@ $(function () {
             method:'POST',
             data: {id:rel,page:page}
           }).then(function(res){
-            $('.msg').html("<h3 style='color:green'>Update Successful</h3>");
+            
+            $(".msg").html(
+              "<div class='alert alert-success' role='alert'>"+
+              "Update Successful"+
+              "</div>"
+            );
           }).catch(function(err){
             console.log(err);
           }); 
 		
+  });
+  
+
+  $("body").on("click",".edit_page", function(){
+
+    var id = $(this).attr('id').split("_");
+    
+    axios({
+      url:LOCAL_URL+'fetch_edit_page_data',
+      method:'POST',
+      data: {page_id:id[2],type:id[1]}
+    }).then(function(res){
+      var json = res.data;
+      
+      $("#ipt_page").val(json.page);
+      $("#hdn_page_id").val(json.id);
+      
+      if(json.top_link == 1){ $("#chk_top_link").val('ON');}else{$("#chk_top_link").val('OFF');}
+      if(json.home_link == 1){ $("#chk_home_link").val('ON');}else{$("#chk_home_link").val('OFF');}
+      if(json.in_page_link == 1){ $("#chk_in_page_link").val('ON');}else{$("#chk_in_page_link").val('OFF');}
+      $("#sel_type").val(json.type);
+      
+      $('.msg').html("<h4 style='color:green;margin-left:10px;'>Edit: "+json.page+"<h4>");
+      $("#btn_create_new_page").hide();
+      $("#btn_edit_page").show();
+        
+    }).catch(function(err){
+      console.log(err);
+    }); 
+
+  });
+  
+
+  $("body").on("click",".del_page", function(){
+		
+		var conf = confirm("Are you Sure you want to delete this page?");
+		if(conf == true){
+			var id = $(this).attr('id').split("_");
+      console.log(id);
+      
+      axios({
+        url:LOCAL_URL+'delete_page',
+        method:'POST',
+        data: {id:id[2],curr_status:id[3]}
+      }).then(function(res){
+        var json = JSON.parse(res.data);
+        if(json.status==1){
+          $(".msg").html(
+            "<div class='alert alert-success' role='alert'>"+
+            "Page Deleted Successfully"+
+            "</div>"
+          );
+         
+          populate_page_table();
+        }
+      }).catch(function(err){
+        console.log(err);
+      }); 
+		}
 	});
 
 
@@ -178,7 +249,7 @@ $(function () {
                         
                         table = table + "<tr><td>"+value.page+"</td><td>"+new_top_link+"</td><td>"+new_home_link+"</td><td>"+new_in_page_link+"</td><td>"+new_status+"</td><td><a href='#' class='edit_page' id='edit_"+value.type+"_"+value.id+"' >Edit</a></td><td><a href='#' class='del_page' id='del_page_"+value.id+"_"+update_status+"' >"+status_value+"</a></td><td>UP</td><td><a href='#' class='order_up_n_down' id='down_"+value.id+"'>DOWN</a></td></tr>";
                     
-                    }else if(i == parseInt(json.num_rows_gallery)){
+                    }else if(i == parseInt(json[0].num_rows_gallery)){
                         
                         table = table + "<tr><td>"+value.page+"</td><td>"+new_top_link+"</td><td>"+new_home_link+"</td><td>"+new_in_page_link+"</td><td>"+new_status+"</td><td><a href='#' class='edit_page' id='edit_"+value.type+"_"+value.id+"' >Edit</a></td><td><a href='#' class='del_page' id='del_page_"+value.id+"_"+update_status+"' >"+status_value+"</a></td><td><a href='#' class='order_up_n_down' id='up_"+value.id+"'>UP</a></td><td>DOWN</td></tr>";
                     
@@ -215,7 +286,7 @@ $(function () {
                         
                         info_table = info_table + "<tr><td>"+value.page+"</td><td>"+new_top_link_info+"</td><td>"+new_home_link_info+"</td><td>"+new_in_page_link_info+"</td><td>"+new_status+"</td><td><a href='#' class='edit_page' id='edit_"+value.type+"_"+value.id+"' >Edit</a></td><td><a href='#' class='del_page' id='del_page_"+value.id+"_"+update_status+"' >"+status_value+"</a></td><td>UP</td><td><a href='#' class='order_up_n_down' id='down_"+value.id+"'>DOWN</a></td></tr>";
                     
-                    }else if(j == parseInt(json.num_rows_info)){
+                    }else if(j == parseInt(json[0].num_rows_info)){
                         
                         info_table = info_table + "<tr><td>"+value.page+"</td><td>"+new_top_link_info+"</td><td>"+new_home_link_info+"</td><td>"+new_in_page_link_info+"</td><td>"+new_status+"</td><td><a href='#' class='edit_page' id='edit_"+value.type+"_"+value.id+"' >Edit</a></td><td><a href='#' class='del_page' id='del_page_"+value.id+"_"+update_status+"' >"+status_value+"</a></td><td><a href='#' class='order_up_n_down' id='up_"+value.id+"'>UP</a></td><td>DOWN</td></tr>";
                     

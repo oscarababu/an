@@ -43,17 +43,21 @@
                 </a>
 
                 <div class="menu-wrapper">
+                    
                     <div class="menu-link">
-                        <a href="{{ url('/info') }}">Information</a>
+                        <a href="{{ url('/items_reports') }}">Items Reports
                     </div>
                     <div class="menu-link">
-                        <a href="{{ url('/gallery') }}">Field Photography
+                        <a href="{{ url('/page_management') }}">Page Management</a>
                     </div>
                     <div class="menu-link">
-                        <a href="{{ url('/gallery') }}">Archives</a>
+                        <a href="{{ url('/new_gallery_content') }}">New Gallery Item</a>
                     </div>
+
                     <div class="menu-link">
-                        <a href="{{ url('/gallery') }}">Recent Acquisition</a>
+                        <a href="{{ url('/new_information_page') }}">New Information Page</a>
                     </div>
+
+                    
                 </div>
         </div>

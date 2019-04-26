@@ -4,11 +4,14 @@
             
             <div class="info_linx">
                     <ul>
-                        <li>About</li>
-                        <li>Guarantee & Policy</li>
-                        <li>Exhibitions</li>
-                        <li>Published In</li>
-                        <li>Contacts</li>
+                    @if ($links)
+                        @foreach($links as $val)
+
+                            <li><a href="{{ url('/' . strtolower($val->type). '/' . strtolower(str_replace(' ','-',$val->page))) }}">{{$val->page}}</a></li>
+
+                            @endforeach
+                        @endif
+                                    
                     </ul>
             </div>
 

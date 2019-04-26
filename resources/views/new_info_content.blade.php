@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h4 class="mt-2 mb-2">New Gallery Item</h4>
+                    <h4 class="mt-2 mb-2">New Information Page</h4>
                 </div>
             </div>
             <div class="msg">
@@ -26,7 +26,7 @@
                         </div>
                         <div class="form-group">
                             <label for="title">Description</label>
-                            <textarea id="txt_desc" rel="Descrpition" class="form-control required" rows="7"></textarea>
+                            <textarea id="txt_desc" rel="Descrpition" class="form-control" rows="7"></textarea>
                         </div>
                     </div>
                     <div class="col">
@@ -81,6 +81,25 @@
                                                 @endforeach
                                         @endif
                                     </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="title">Link Title</label>
+                                    <input type="text" id="txt_link_title" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="title">Link</label>
+                                    <input type="text" id="txt_link" class="form-control" />
                                 </div>
                             </div>
                         </div>
@@ -288,7 +307,10 @@
             <script src="https://fengyuanchen.github.io/js/common.js"></script>
             <script src="https://unpkg.com/cropperjs/dist/cropper.js"></script>
             <script src="{{asset('cropper/jquery-cropper.js')}}"></script>
-            <script src="{{asset('cropper/thumbnail.js')}}"></script>
+            <script src="{{asset('cropper/info_thumbnail.js')}}"></script>
+            <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+            <script>tinymce.init({selector:'textarea'});</script>
+
             <!--
             <script src="{{asset('js/item.js')}}"></script> 
             -->

@@ -12,10 +12,15 @@
                 <img id="item_img" />
 
                 <div class="linx">
-                        <a href="{{ url('/gallery/') }}"><div class='cls_slide' id='cls_slide'></div></a>
-                        <h5 class='this_project_ttl'  >{{$val->title}}</h5>
+                        <a href="{{ url('/gallery/' . $pagex) }}"><div class='cls_slide' id='cls_slide'></div></a>
+                        <h4 class='this_project_ttl'  >{{$val->title}}</h4>
                     
-                        <p class='this_project_desc' style='float:left; width: 100%;' >{{$val->description}}</p>
+                        <div  class='this_project_desc'>
+                            <p>
+                                {{$val->description}}
+                            </p>
+                        </div>
+                        
                         <!--<h4><div class='ghost_linx'></div></h4>-->
                         
                         <h5 style='width:100%; float:left;'>

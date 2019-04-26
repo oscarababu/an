@@ -18,7 +18,7 @@
                     
 
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                      Upload Item Gallery Images
+                      Upload Item Thumbnail Image
                     </button>
 
           </div>
@@ -27,15 +27,14 @@
 
         <div class="row mt-3 mb-3">
             
-
-              @if ($images)
-                @foreach($images as $val_images)
+              @if ($thumb)
+                @foreach($thumb as $val_thumb)
                   <div class="col-md-3 mt-3">
                       <div class="card ">
-                          <img src="{{ str_replace('upload/','upload/w_300,c_scale/',$val_images->image_link) }}" />
-                          
+                          <img src="{{ str_replace('upload/','upload/w_300,c_scale/',$val_thumb->image_link) }}" />
+                          <input type="hidden" id="hdn_thumb_id" value="{{$val_thumb->id}}" />
                           <div class="card-footer">
-                            <small class="text-muted"><a href=''>Delete</a></small>
+                            <small class="text-muted">Thumb Nail Image</small>
                           </div>
                       </div>
                   </div>
@@ -214,7 +213,7 @@
             <script src="https://fengyuanchen.github.io/js/common.js"></script>
             <script src="https://unpkg.com/cropperjs/dist/cropper.js"></script>
             <script src="{{asset('cropper/jquery-cropper.js')}}"></script>
-            <script src="{{asset('cropper/main.js')}}"></script>
+            <script src="{{asset('cropper/thumbnail_update.js')}}"></script>
             <!--
             <script src="{{asset('js/item.js')}}"></script> 
             -->

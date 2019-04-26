@@ -30,18 +30,17 @@
                 </a>
 
                 <div class="menu-wrapper">
-                    <div class="menu-link">
-                        <a href="{{ url('/info') }}">Information</a>
-                    </div>
-                    <div class="menu-link">
-                        <a href="{{ url('/gallery') }}">Field Photography
-                    </div>
-                    <div class="menu-link">
-                        <a href="{{ url('/gallery') }}">Archives</a>
-                    </div>
-                    <div class="menu-link">
-                        <a href="{{ url('/gallery') }}">Recent Acquisition</a>
-                    </div>
+
+                    @if ($menu)
+                    @foreach($menu as $val)
+
+                        <div class="menu-link">
+                            <a href="{{ url('/' . strtolower($val->type) . '/' . strtolower(str_replace(' ', '-',$val->page))) }}">{{$val->page}}</a>
+                        </div>
+
+                        @endforeach
+                    @endif
+
                 </div>
         </div>
         <div class="load-bar" id="progress_bar">
