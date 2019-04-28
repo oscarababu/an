@@ -31,13 +31,25 @@ Route::post('/create_gallery_item', 'GalleryController@create_gallery_item');
 
 Route::post('/create_info_item', 'InfoController@create_info_item');
 
+Route::post('/update_info_item', 'InfoController@update_info_item');
+
+Route::post('/fetch_info_background_image', 'InfoController@fetch_info_background_image');
+
 Route::post('/save_gallery_item_image', 'GalleryController@save_gallery_item_image');
 
+Route::post('/save_gallery_full_images', 'GalleryController@save_gallery_full_images');
+
 Route::post('/save_gallery_item_thumbnail', 'GalleryController@save_gallery_item_thumbnail');
+
+Route::post('/image_delete', 'GalleryController@image_delete');
 
 Route::post('/fetch_first_item_image', 'GalleryController@fetch_first_item_image');
 
 Route::get('/page_management', 'AdminController@page_management');
+
+Route::get('/edit_info_item/{id}', 'AdminController@edit_info_item');
+
+Route::get('/edit_gallery_item/{id}', 'AdminController@edit_gallery_item');
 
 Route::post('/pages_report_data', 'PageController@pages_report_data');
 

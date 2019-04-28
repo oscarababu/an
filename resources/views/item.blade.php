@@ -17,7 +17,7 @@
                     
                         <div  class='this_project_desc'>
                             <p>
-                                {{$val->description}}
+                                {!!$val->description!!}
                             </p>
                         </div>
                         

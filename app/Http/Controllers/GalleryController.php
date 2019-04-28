@@ -58,8 +58,52 @@ class GalleryController extends Controller
     }
 
     public function save_gallery_item_image(Request $request){
+
+        $first_page = ($request->firstPage) ? $request->firstPage: 0;
+        $second_page = ($request->secondPage) ? $request->secondPage : 0;
+        $third_page = ($request->thridPage) ? $request->thridPage : 0;
+        $page = $first_page . "_" . $second_page . "_". $third_page;
+
+        $id = Gallery::where('page',$page)->first()->id;
         
         $img = new Images();
+        $img->image_link = $request->up_image;
+        $img->format = $request->up_image_format;
+        $img->cont_id = $id;
+        $img->type = $request->type;
+        $img->public_id = $request->up_image_public_id;
+        $img->save();
+
+        $g = Gallery::find($id);
+        $g->status = 1;
+        $g->save();
+
+        return array('status'=>1);
+    }
+
+    public function save_gallery_full_images(Request $request){
+
+        $id = $request->item_id;
+        
+        $img = new Images();
+        $img->image_link = $request->up_image;
+        $img->format = $request->up_image_format;
+        $img->cont_id = $id;
+        $img->type = $request->type;
+        $img->public_id = $request->up_image_public_id;
+        $img->save();
+
+        $g = Gallery::find($id);
+        $g->status = 1;
+        $g->save();
+
+        return array('status'=>1);
+
+    }
+
+    public function save_gallery_item_thumbnail(Request $request){
+        
+        $img = Images::find($request->thumb_id);
         $img->image_link = $request->up_image;
         $img->format = $request->up_image_format;
         $img->cont_id = $request->item_id;
@@ -70,24 +114,35 @@ class GalleryController extends Controller
         return array('status'=>1);
     }
 
-    public function save_gallery_item_thumbnail(Request $request){
-        
-        $img = new Images($request->thumb_id);
-        $img->image_link = $request->up_image;
-        $img->format = $request->up_image_format;
-        $img->cont_id = $request->item_id;
-        $img->type = $request->type;
-        $img->public_id = $request->up_image_public_id;
-        $img->save();
+    public function image_delete(Request $request){
 
-        return array('status'=>1);
+        $item_id = $request->item_id;
+        $image_id = $request->image_id;
+
+        $i = Images::find($image_id);
+        if($i){
+
+            $public_id = $i->public_id;
+
+            $result = \Cloudinary\Uploader::destroy($public_id, $options = array(
+                'api_key'=>'423211761636548',
+                'api_secret'=>'CYSYzZo-v53o4breP5kfTVzK1mw',
+                'cloud_name'=>'dct1ukpad'
+            ));
+
+            $i->delete();
+            return array('status'=>1);
+        }else{
+            return array('status'=>0);
+        }
+        
     }
 
     public function fetch_first_item_image(Request $request){
 
         $id = $request->id;
 
-        $res = Images::where('cont_id',$id)->get();
+        $res = Images::where('cont_id',$id)->where('type','full_image')->get();
 
         foreach($res as $i=>$val){
             $d[$i]['image'] = $val->image_link;

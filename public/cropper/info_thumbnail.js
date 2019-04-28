@@ -39,21 +39,50 @@ $(function () {
   var LOCAL_URL = 'http://127.0.0.1:8000/';    
 
 
+  $("#update_info_item").click(function(){
+       var desc = tinyMCE.get('txt_desc').getContent();
+       var id = $('#hdn_id').val();
+       if(desc !=""){
+
+        axios({
+          url:LOCAL_URL+'update_info_item',
+          method:'POST',
+          data: {"id":id,"desc":desc}
+        }).then(function(res){
+          if(res.status =="200"){
+            $(".msg").html(
+              "<div class='alert alert-success' role='alert'>"+
+              "Success: Item Saved"+
+              "</div>"
+            );
+            
+          }
+          
+        }).catch(function(err){
+          console.log(err);
+        });
+
+       }else{
+         $('.msg').html(
+          "<div class='alert alert-danger' role='alert'>"+
+          "Error: Description Empty "+
+          "</div>"
+         );
+       }
+  });
+
   $("#create_gallery_item").click(function(){
         
-
        var inputChk;
        var pageInputChk;
        var missingValue ="";
    
        var firstPage = $('#sel_first_page').val();
-       var secondPage = $('#sel_second_page').val();
-       var thirdPage = $('#sel_third_page').val();
+       var secondPage = "";
+       var thirdPage = "";
    
        var title = $('#txt_title').val();
        var desc = tinyMCE.get('txt_desc').getContent();
-       var link_ttl = $('#txt_link_title').val();
-       var link = $('#txt_link').val();
 
        if(firstPage =="" && secondPage =="" && thirdPage == ""){
         pageInputChk = false;
@@ -104,27 +133,40 @@ $(function () {
       
         }else{
 
-            axios({
-              url:LOCAL_URL+'create_info_item',
-              method:'POST',
-              data: {"link":link,"link_ttl":link_ttl,"title":title,"desc":desc,"firstPage":firstPage,"secondPage":secondPage,"thirdPage":thirdPage}
-            }).then(function(res){
-              if(res.status =="200"){
-                itemId = res.data.item_id;
-                $(".msg").empty();
-                $("#content_upload").hide();
-                $("#image_upload").fadeIn('slow');
-              }else{
-                $(".msg").html(
-                  "<div class='alert alert-danger' role='alert'>"+
-                  "Error: Item already Saved"+
-                  "</div>"
-                );
-              }
-              
-            }).catch(function(err){
-              console.log(err);
-            });
+          if(desc !=""){
+
+              axios({
+                url:LOCAL_URL+'create_info_item',
+                method:'POST',
+                data: {"title":title,"desc":desc,"firstPage":firstPage,"secondPage":secondPage,"thirdPage":thirdPage}
+              }).then(function(res){
+                console.log(res.data);
+                if(res.data.status !="0"){
+                  itemId = res.data.item_id;
+                  $(".msg").empty();
+                  $("#content_upload").hide();
+                  $("#image_upload").fadeIn('slow');
+                }else{
+                  $(".msg").html(
+                    "<div class='alert alert-danger' role='alert'>"+
+                    "Error: Item already Exists"+
+                    "</div>"
+                  );
+                }
+                
+              }).catch(function(err){
+                console.log(err);
+              });
+
+          }else{
+            $(".msg").html(
+              "<div class='alert alert-danger' role='alert'>"+
+              "Error: Enter Page Decription"+
+              "</div>"
+            );
+          }
+
+            
         }
 
   });
@@ -167,10 +209,14 @@ $(function () {
       var up_image_format = res.data.format;
       var up_image_public_id = res.data.public_id;
 
+      var firstPage = $('#sel_first_page').val();
+      var secondPage = "";
+      var thirdPage = "";
+
       axios({
         url:LOCAL_URL+'save_gallery_item_image',
         method:'POST',
-        data: {"type":"full_image","up_image":up_image,"item_id":itemId,"up_image_format":up_image_format,"up_image_public_id":up_image_public_id}
+        data: {"firstPage":firstPage,"secondPage":secondPage,"thirdPage":thirdPage,"type":"full_image","up_image":up_image,"item_id":itemId,"up_image_format":up_image_format,"up_image_public_id":up_image_public_id}
       }).then(function(res){
         //console.log(res);
 
@@ -204,6 +250,7 @@ $(function () {
    
         $('#txt_title').val('');
         $('#txt_desc').val('');
+        tinymce.get('#txt_desc').setContent('');
         $("img").attr('src','');
 
         $("#content_upload").fadeIn('slow');

@@ -40,6 +40,44 @@ $(function () {
   var LOCAL_URL = 'http://127.0.0.1:8000/';
 
 
+  $('.del_image').on('click',  function () {
+    var id = $(this).attr('id').split("_");
+    var item_id = id[0];
+    var image_id = id[1];
+
+    var r = confirm("Are you sure you want to delete the image");
+
+    if (r == true) {
+        axios({
+          url:LOCAL_URL+'image_delete',
+          method:'POST',
+          data: {"item_id":item_id,"image_id":image_id},
+          onUploadProgress:  function( progressEvent ) {
+            $(".msg").html(
+              "<div class='alert alert-warning' role='alert'>"+
+              "Loading... "+
+              "</div>"
+            );
+            
+          }.bind(this)
+        }).then(function(res){
+          console.log(res.data);
+          $(".msg").html(
+            "<div class='alert alert-success' role='alert'>"+
+            "Success: Image Uploaded "+
+            "</div>"
+          );
+    
+          window.location.reload();
+          
+        }).catch(function(err){
+          console.log(err);
+        });
+    }
+
+  });
+
+
   $("#save_gallery_image").click(function(){
     var canvas = $("#image").cropper('getCroppedCanvas').toDataURL(uploadedImageType);
     var itemId = $("#hdn_item_id").val();
@@ -79,7 +117,7 @@ $(function () {
       var up_image_public_id = res.data.public_id;
       
       axios({
-        url:LOCAL_URL+'save_gallery_item_image',
+        url:LOCAL_URL+'save_gallery_full_images',
         method:'POST',
         data: {"type":"full_image","up_image":up_image,"item_id":itemId,"up_image_format":up_image_format,"up_image_public_id":up_image_public_id}
       }).then(function(res){

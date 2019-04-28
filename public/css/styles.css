@@ -23,7 +23,10 @@ html, body {
 }
 
 .full-height img {
-    height: 100%;
+    width: auto;
+    height : auto;
+    max-height: 100%;
+    max-width: 100%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -204,7 +207,7 @@ html, body {
 .info_linx{
     background-image:url('../images/opacity.png');
     width:380px;
-    height: 190px;
+    min-height: 190px;
     right:40px;
     top:55px;
     position:absolute;
@@ -230,6 +233,18 @@ html, body {
     font-weight: bold;
     text-decoration:underline;
 }
+
+.info_large_content{
+    background-image:url('../images/opacity.png');
+    width:800px;
+    min-height: 190px;
+    right:40px;
+    top:55px;
+    position:absolute;
+    padding:10px;
+    font-size: 14px;
+}
+
 .slider_no{
     font-size:20px;
     margin-top:-25px;
@@ -301,6 +316,21 @@ html, body {
 	float: left;
 	height: 40px;
 	cursor: pointer;
+}
+
+.divider{
+    width:97%;
+    background: black;
+    height:3px;
+    margin: 0 auto;
+}
+.info_desc{
+    margin:3px;
+    padding:5px;
+    min-height:20px;
+    height:auto;
+    width:96%;
+    font-size:14px;
 }
 
 

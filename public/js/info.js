@@ -1,25 +1,28 @@
 window.addEventListener('load', function() {
-    update();
-});
-
-$('.thumb-nail').mouseenter(function(){
-  var id = $(this).attr('id').split('_');
-    $("#plus_"+id[1]).fadeIn('slow');
-    $("#title_"+id[1]).fadeIn('slow');
-});
-
-$('.thumb-nail').mouseleave(function(){
-  var id = $(this).attr('id').split('_');
-    $("#plus_"+id[1]).fadeOut('slow');
-    $("#title_"+id[1]).fadeOut('slow');
-});
-
-function update() { 
-
-    $progress = document.querySelector('#progressHold');
-
-    var url = 'https://images.unsplash.com/photo-1536522147990-430415457f34?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1534&q=80';
     
+    var LOCAL_URL = 'http://127.0.0.1:8000/';
+    var hdn_img = $("#hdn_img_id").val();
+
+    axios({
+        url:LOCAL_URL+'fetch_info_background_image',
+        method:'POST',
+        data: {"id":hdn_img}
+      }).then(function(res){
+        //console.log(res.data.image_link);
+        update(res.data.image_link);
+        
+      }).catch(function(err){
+        console.log(err);
+      });
+
+});
+
+
+function update(url) { 
+
+    $progress = document.querySelector('#progress_bar');
+
+   
     var request = new XMLHttpRequest();
     request.onprogress = onProgress;
     request.onload = onComplete;
@@ -37,14 +40,16 @@ function update() {
       var width = 1; 
       element.style.width = parseInt(progress * 100) + '%'; 
     
-      console.log(progress);
+      //console.log(progress);
     }
     
     function onComplete(event) {
       var $img = document.createElement('img');
-      //$img.setAttribute('src', url);
+     // $img.setAttribute('src', url);
       $progress.appendChild($img);
       //console.log('complete', url);
+
+      document.getElementById("img").src= url;
     }
     
     function onError(event) {

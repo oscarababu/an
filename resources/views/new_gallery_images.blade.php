@@ -35,7 +35,7 @@
                           <img src="{{ str_replace('upload/','upload/w_300,c_scale/',$val_images->image_link) }}" />
                           
                           <div class="card-footer">
-                            <small class="text-muted"><a href=''>Delete</a></small>
+                            <small class="text-muted"><a id="{{ $image_id . '_' . $val_images->id }}" href="#" class="del_image">Delete</a></small>
                           </div>
                       </div>
                   </div>

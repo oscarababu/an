@@ -60,8 +60,8 @@
 
                                     <td><a href="{{ url('/thumbnail_management/' . $val->id) }}">Thumbnail</a></td>
                                     <td><a href="{{ url('/image_management/' . $val->id) }}">Images</a></td>
-                                    <td><a>Edit</a></td>
-                                    <td><a>Delete</a></td>
+                                    <td><a href="{{ url('/edit_info_item/' . $val->id) }}">Edit</a></td>
+                                    <td><a href="{{ url('/image_management/' . $val->id) }}">Delete</a></td>
                                 </tr>
                             
                             @endforeach

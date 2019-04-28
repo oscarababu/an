@@ -289,6 +289,14 @@
             <script src="https://unpkg.com/cropperjs/dist/cropper.js"></script>
             <script src="{{asset('cropper/jquery-cropper.js')}}"></script>
             <script src="{{asset('cropper/thumbnail.js')}}"></script>
+            <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+            <script>tinymce.init(
+                {
+                    selector: 'textarea',  // change this value according to your HTML
+                    toolbar: 'undo redo | styleselect | bold italic | link image',
+                    plugins: "link",
+                    }
+            );</script>
             <!--
             <script src="{{asset('js/item.js')}}"></script> 
             -->

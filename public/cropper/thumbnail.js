@@ -50,7 +50,8 @@ $(function () {
        var thirdPage = $('#sel_third_page').val();
    
        var title = $('#txt_title').val();
-       var desc = $('#txt_desc').val();
+       var desc = tinyMCE.get('txt_desc').getContent();
+       console.log("Desc is Here "+ desc);
 
        if(firstPage =="" && secondPage =="" && thirdPage == ""){
         pageInputChk = false;
@@ -59,7 +60,7 @@ $(function () {
        }
 
        $(".required").each(function() {
-
+        
         var input_val = $("#"+$(this).attr("id")).val();
         if(input_val ==""){
           inputChk = false;
@@ -164,10 +165,14 @@ $(function () {
       var up_image_format = res.data.format;
       var up_image_public_id = res.data.public_id;
 
+      var firstPage = $('#sel_first_page').val();
+      var secondPage = $('#sel_second_page').val();
+      var thirdPage = $('#sel_third_page').val();
+
       axios({
         url:LOCAL_URL+'save_gallery_item_image',
         method:'POST',
-        data: {"type":"thumbnail","up_image":up_image,"item_id":itemId,"up_image_format":up_image_format,"up_image_public_id":up_image_public_id}
+        data: {"firstPage":firstPage,"secondPage":secondPage,"thirdPage":thirdPage,"type":"thumbnail","up_image":up_image,"item_id":itemId,"up_image_format":up_image_format,"up_image_public_id":up_image_public_id}
       }).then(function(res){
         //console.log(res);
 
@@ -198,6 +203,7 @@ $(function () {
    
         $('#txt_title').val('');
         $('#txt_desc').val('');
+        tinymce.get('txt_desc').setContent('');
         $("img").attr('src','');
 
         $("#content_upload").fadeIn('slow');

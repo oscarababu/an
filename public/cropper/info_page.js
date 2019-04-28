@@ -39,6 +39,8 @@ $(function () {
   var CLOUDINARY_UPLOAD_PRESET = "glz8tkwo";
   var LOCAL_URL = 'http://127.0.0.1:8000/';
 
+  
+
 
   $("#save_gallery_image").click(function(){
     var canvas = $("#image").cropper('getCroppedCanvas').toDataURL(uploadedImageType);

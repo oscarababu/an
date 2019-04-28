@@ -20,21 +20,11 @@
                 <div class="row" >
                     
                     <div class="col" >
-                        <div class="form-group">
-                            <label for="title">Title</label>
-                            <input type="text" id="txt_title"  rel="Title" name="title" class="form-control required" placeholder="Title">
-                        </div>
-                        <div class="form-group">
-                            <label for="title">Description</label>
-                            <textarea id="txt_desc" rel="Descrpition" class="form-control" rows="7"></textarea>
-                        </div>
-                    </div>
-                    <div class="col">
 
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="title">First Page</label>
+                                    <label for="title">Page</label>
                                     <select id="sel_first_page" class="form-control required_page">
                                         <option></option>
                                         @if ($pages)
@@ -49,62 +39,10 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="title">Second Page</label>
-                                    <select id="sel_second_page" class="form-control required_page">
-                                        <option></option>
-                                        @if ($pages)
-                                                @foreach($pages as $val)
-                                                
-                                                <option value="{{$val->id}}">{{$val->page}}</option>
-
-                                                @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <label for="title">Description</label>
+                            <textarea id="txt_desc" rel="Descrpition" class="form-control" rows="7"></textarea>
                         </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="title">Third Page</label>
-                                    <select id="sel_third_page" class="form-control required_page">
-                                        <option></option>
-                                        @if ($pages)
-                                                @foreach($pages as $val)
-                                                
-                                                <option value="{{$val->id}}">{{$val->page}}</option>
-
-                                                @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="title">Link Title</label>
-                                    <input type="text" id="txt_link_title" class="form-control" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="title">Link</label>
-                                    <input type="text" id="txt_link" class="form-control" />
-                                </div>
-                            </div>
-                        </div>
-
-                        
 
                         <div class="row">
                             <div class="col">
@@ -113,6 +51,11 @@
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+                    <div class="col">  
+
+                        
                     </div>
                     
 
@@ -309,7 +252,13 @@
             <script src="{{asset('cropper/jquery-cropper.js')}}"></script>
             <script src="{{asset('cropper/info_thumbnail.js')}}"></script>
             <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-            <script>tinymce.init({selector:'textarea'});</script>
+            <script>tinymce.init(
+                {
+                    selector: 'textarea',  // change this value according to your HTML
+                    toolbar: 'undo redo | styleselect | bold italic | link image',
+                    plugins: "link",
+                    }
+            );</script>
 
             <!--
             <script src="{{asset('js/item.js')}}"></script> 
