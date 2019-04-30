@@ -255,8 +255,8 @@
             <script>tinymce.init(
                 {
                     selector: 'textarea',  // change this value according to your HTML
-                    toolbar: 'undo redo | styleselect | bold italic | link image',
-                    plugins: "link",
+                    toolbar: 'undo redo | styleselect | bold italic | link image | lists | numlist bullist ',
+                    plugins: "link, lists",
                     }
             );</script>
 

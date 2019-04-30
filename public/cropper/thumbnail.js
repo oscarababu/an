@@ -51,7 +51,6 @@ $(function () {
    
        var title = $('#txt_title').val();
        var desc = tinyMCE.get('txt_desc').getContent();
-       console.log("Desc is Here "+ desc);
 
        if(firstPage =="" && secondPage =="" && thirdPage == ""){
         pageInputChk = false;
@@ -102,31 +101,41 @@ $(function () {
       
         }else{
 
-            axios({
-              url:LOCAL_URL+'create_gallery_item',
-              method:'POST',
-              data: {"title":title,"desc":desc,"firstPage":firstPage,"secondPage":secondPage,"thirdPage":thirdPage}
-            }).then(function(res){
-              if(res.status =="200"){
-                itemId = res.data.item_id;
-                $(".msg").empty();
-                $("#content_upload").hide();
-                $("#image_upload").fadeIn('slow');
-              }else{
-                $(".msg").html(
-                  "<div class='alert alert-danger' role='alert'>"+
-                  "Error: Item already Saved"+
-                  "</div>"
-                );
-              }
-              
-            }).catch(function(err){
-              console.log(err);
-            });
+            if(desc !=""){
+                axios({
+                  url:LOCAL_URL+'create_gallery_item',
+                  method:'POST',
+                  data: {"title":title,"desc":desc,"firstPage":firstPage,"secondPage":secondPage,"thirdPage":thirdPage}
+                }).then(function(res){
+                  if(res.data.status !="0"){
+                    itemId = res.data.item_id;
+                    $(".msg").empty();
+                    $("#content_upload").hide();
+                    $("#image_upload").fadeIn('slow');
+                  }else{
+                    $(".msg").html(
+                      "<div class='alert alert-danger' role='alert'>"+
+                      "Error: Item already Saved"+
+                      "</div>"
+                    );
+                  }
+                  
+                }).catch(function(err){
+                  console.log(err);
+                });
+            }else{
+              $(".msg").html(
+                "<div class='alert alert-danger' role='alert'>"+
+                "Error: Description Input Empty"+
+                "</div>"
+              );
+            }
+            
         }
 
   });
 
+  var element = document.getElementById("progress-bar");
 
   $("#btn_image").click(function(){
     var canvas = $("#image").cropper('getCroppedCanvas').toDataURL(uploadedImageType);
@@ -137,7 +146,7 @@ $(function () {
     formData.append('cloud_name','dct1ukpad');
     formData.append('tags',itemId);
 
-    var element = document.getElementById("progress-bar"); 
+     
 
     axios({
       url:CLOUDINARY_URL,
@@ -174,11 +183,11 @@ $(function () {
         method:'POST',
         data: {"firstPage":firstPage,"secondPage":secondPage,"thirdPage":thirdPage,"type":"thumbnail","up_image":up_image,"item_id":itemId,"up_image_format":up_image_format,"up_image_public_id":up_image_public_id}
       }).then(function(res){
-        //console.log(res);
-
+        
         $(".msg").html(
             "<div class='alert alert-success' role='alert'>"+
             "Success: Image Uploaded "+
+            "<a href='image_management/"+res.data.item_id+"'>Click to Add gallery Images for "+res.data.item_title+"</a>"+
             "</div>"
           );
 
@@ -200,6 +209,9 @@ $(function () {
         $('#sel_first_page').val('');
         $('#sel_second_page').val('');
         $('#sel_third_page').val('');
+
+        element.style.width = '0%'; 
+        element.innerHTML = '0%';
    
         $('#txt_title').val('');
         $('#txt_desc').val('');

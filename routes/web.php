@@ -35,6 +35,8 @@ Route::post('/update_info_item', 'InfoController@update_info_item');
 
 Route::post('/fetch_info_background_image', 'InfoController@fetch_info_background_image');
 
+Route::post('/gen_images', 'HomeController@gen_images');
+
 Route::post('/save_gallery_item_image', 'GalleryController@save_gallery_item_image');
 
 Route::post('/save_gallery_full_images', 'GalleryController@save_gallery_full_images');
@@ -70,6 +72,10 @@ Route::get('/items_reports', 'AdminController@items_reports');
 Route::get('/new_information_page', 'AdminController@new_information_page');
 
 Route::get('/image_management/{id}', 'AdminController@image_management');
+
+Route::get('/back_management', 'AdminController@back_management');
+
+Route::post('/update_back_images', 'AdminController@update_back_images');
 
 Route::get('/thumbnail_management/{id}', 'AdminController@thumbnail_management');
 

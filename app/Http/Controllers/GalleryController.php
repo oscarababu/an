@@ -17,9 +17,8 @@ class GalleryController extends Controller
     {
         $res_page = Pages::where('page', 'like', '%' . str_replace('-',' ',$page . '%'))->first();
         if($res_page){
-
-            $res = DB::table('gallery')->join('images','gallery.id','=','images.cont_id')->where('images.type','thumbnail')->where('gallery.page', 'like', '%' . $res_page->id . '%')->get();
-            return view('gallery')->with(['pagex'=>$page])->with(['items'=>$res])->with(['menu'=>Pages::where('top_link',1)->get()]);
+            $res = DB::table('gallery')->join('images','gallery.id','=','images.cont_id')->where('images.type','thumbnail')->where('gallery.page', 'like', '%' . $res_page->id . '%')->orderBy('gallery.id','DESC')->get();
+            return view('gallery')->with(['pagex'=>$page])->with(['items'=>$res])->with(['menu'=>Pages::where('top_link',1)->orderBy('page_order','ASC')->get()])->with(['current_page'=>$page]);
        
         }else{
             abort(404);
@@ -31,7 +30,7 @@ class GalleryController extends Controller
     {
         $res_gallery = Gallery::where('page_link',$item)->get();
 
-        return view('item')->with(['pagex'=>$pagex])->with(['gallery'=>$res_gallery])->with(['menu'=>Pages::where('top_link',1)->get()]);
+        return view('item')->with(['pagex'=>$pagex])->with(['current_page'=>$pagex])->with(['gallery'=>$res_gallery])->with(['menu'=>Pages::where('top_link',1)->get()]);
     }
 
     public function create_gallery_item(Request $request){
@@ -43,6 +42,7 @@ class GalleryController extends Controller
             $chk = Gallery::select('id')->where('page_link',$page_link)->get();
 
             if($chk->count() == 0){
+
                 $g = new Gallery();
                 $g->title = $request->title;
                 $g->page_link = $page_link;
@@ -52,6 +52,7 @@ class GalleryController extends Controller
                 $g->save();
                 $item_id = Gallery::select('id')->orderBy('id','desc')->first();
                 return array('item_id'=>$item_id->id);
+
             }else{
                 return array('status'=>0);
             }       
@@ -64,21 +65,21 @@ class GalleryController extends Controller
         $third_page = ($request->thridPage) ? $request->thridPage : 0;
         $page = $first_page . "_" . $second_page . "_". $third_page;
 
-        $id = Gallery::where('page',$page)->first()->id;
+        $item = Gallery::where('page',$page)->orderBy('id','DESC')->first();
         
         $img = new Images();
         $img->image_link = $request->up_image;
         $img->format = $request->up_image_format;
-        $img->cont_id = $id;
+        $img->cont_id = $item->id;
         $img->type = $request->type;
         $img->public_id = $request->up_image_public_id;
         $img->save();
 
-        $g = Gallery::find($id);
+        $g = Gallery::find($item->id);
         $g->status = 1;
         $g->save();
 
-        return array('status'=>1);
+        return array('status'=>1,'item_id'=>$item->id,'item_title'=>$item->title);
     }
 
     public function save_gallery_full_images(Request $request){

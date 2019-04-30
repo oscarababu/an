@@ -1,0 +1,34 @@
+
+3. Random background images on the information landing page.
+4. Order site links.
+
+7. Disable pages.
+9. Add newsletter plugin.
+10. Stretch cropped images for backgrounds.
+11. Login and admin control.
+17. Restrict full Image upload.
+
+
+
+
+28/4/2019
+
+12. Check duplicate items gallery[ok].
+13. Missing description bug[fixed].
+14. Add link to add gallery Images[done].
+15. Erroneous gallery - image linking resulting in improper gallery[Fixed].
+
+29/4/2019
+
+17. List button on Tinymce.
+8. Add proper font.
+5. Highlight selected top link.
+6. Add information pages and test.
+
+30/4/2019
+
+1. Load random background images on the home page.
+2. Manage random background images.
+18. Tinymce not saving bold styling.
+16. Mobile responsiveness.
+

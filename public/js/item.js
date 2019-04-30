@@ -96,7 +96,7 @@ function update(url) {
       var $img = document.createElement('img');
       //$img.setAttribute('src', url);
       $progress.appendChild($img);
-      console.log('complete', url);
+      //console.log('complete', url);
       //$("#item_img").attr('src',url);
       document.getElementById("item_img").src = url;
     }

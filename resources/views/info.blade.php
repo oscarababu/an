@@ -1,47 +1,71 @@
 @include('head') 
         <div class="full-height">
+            <img id="img" src=""/>
+            
 
-            @if ($items)
-                @foreach($items as $val_items)
-                    <input type="hidden" id="hdn_img_id" value="{{$val_items->id}}" />
-                    <img id="img" src=""/>
+            @if(strtolower($page->page) =='information')
+            
+                <input type="hidden" id="hdn_img_id" value="{{App\Images::where('cont_id',App\Gallery::where('page',$page->id . '_0_0')->first()->id)->first()->id}}" />
+                <div class="info_linx">
+                    <ul>
+                    @if ($links)
+                        @foreach($links as $val)
+                                
+                                
+                            <li><a href="{{ url('/' . strtolower($val->type). '/' . strtolower(str_replace(' ','-',$val->page))) }}">{{$val->page}}</a></li>
+                              
+                            @endforeach
+                        @endif
+                                    
+                    </ul>
+                </div>
 
-                    @if(strlen($val_items->description) < 50)
+            @else
 
-                        <div class="info_linx">
+                @if ($items)
+                    @foreach($items as $val_items)
+                        <input type="hidden" id="hdn_img_id" value="{{$val_items->id}}" />
+                      
+                        @if(strlen($val_items->description) < 200)
 
-                            <ul>
-                            @if ($links)
-                                @foreach($links as $val)
-                                        
-                                        @if(strtolower(str_replace(' ','-',App\Pages::find(explode('_', $val_items->page)[0])->page)) == strtolower(str_replace(' ','-',$val->page)))
-                                            <li><a href="{{ url('/' . strtolower($val->type). '/' . strtolower(str_replace(' ','-',$val->page))) }}"><b style='font-weight:bold'> {{$val->page}}</b></a></li>
-                                        @else
-                                            <li><a href="{{ url('/' . strtolower($val->type). '/' . strtolower(str_replace(' ','-',$val->page))) }}">{{$val->page}}</a></li>
-                                        @endif
-                                    @endforeach
-                                @endif
+                            <div class="info_linx">
+
+                                <ul>
+                                @if ($links)
+                                    @foreach($links as $val)
                                             
-                            </ul>
-                            @if(!empty($val_items->description))
-                                
-                                    <div class="divider"></div>
-                                    <div class="info_desc">
-                                        {!! $val_items->description !!}
-                                    </div>
-                                
-                            @endif
-                        </div>
-                    @else
-                        <div class="info_large_content">
-                            <h2>{{App\Pages::find(explode('_', $val_items->page)[0])->page}}</h2>
-                            <a href="{{ url('/information/information') }}"><div class="cls_slide"></div></a>
-                            {!! $val_items->description !!}
-                        </div>
-                    @endif
+                                            @if(strtolower(str_replace(' ','-',App\Pages::find(explode('_', $val_items->page)[0])->page)) == strtolower(str_replace(' ','-',$val->page)))
+                                                <li><a href="{{ url('/' . strtolower($val->type). '/' . strtolower(str_replace(' ','-',$val->page))) }}"><b style='font-weight:bold'> {{$val->page}}</b></a></li>
+                                            @else
+                                                <li><a href="{{ url('/' . strtolower($val->type). '/' . strtolower(str_replace(' ','-',$val->page))) }}">{{$val->page}}</a></li>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                                
+                                </ul>
+                                @if(!empty($val_items->description))
+                                    
+                                        <div class="divider"></div>
+                                        <div class="info_desc">
+                                            {!! $val_items->description !!}
+                                        </div>
+                                    
+                                @endif
+                            </div>
+                        @else
+                            <div class="info_large_content">
+                                <h2>{{App\Pages::find(explode('_', $val_items->page)[0])->page}}</h2>
+                                <a href="{{ url('/information/information') }}"><div class="cls_slide"></div></a>
+                                {!! $val_items->description !!}
+                            </div>
+                        @endif
 
-                @endforeach
+                    @endforeach
+                @endif
+
             @endif
+
+            
 
             
         </div>

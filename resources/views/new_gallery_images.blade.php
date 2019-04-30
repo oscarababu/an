@@ -66,7 +66,7 @@
                                   <div class="col-md-12">
                                     
                                     <div class="img-container">
-                                      <img id="image" src="" alt="Gallery Thumbnail Image">
+                                      <img id="image" src="" alt="Gallery Image">
                                     </div>
                                   </div>
                                 </div>

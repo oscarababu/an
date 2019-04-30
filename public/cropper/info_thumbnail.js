@@ -133,8 +133,6 @@ $(function () {
       
         }else{
 
-          if(desc !=""){
-
               axios({
                 url:LOCAL_URL+'create_info_item',
                 method:'POST',
@@ -158,19 +156,14 @@ $(function () {
                 console.log(err);
               });
 
-          }else{
-            $(".msg").html(
-              "<div class='alert alert-danger' role='alert'>"+
-              "Error: Enter Page Decription"+
-              "</div>"
-            );
-          }
+          
 
             
         }
 
   });
 
+  var element = document.getElementById("progress-bar"); 
 
   $("#btn_image").click(function(){
     var canvas = $("#image").cropper('getCroppedCanvas').toDataURL(uploadedImageType);
@@ -181,7 +174,7 @@ $(function () {
     formData.append('cloud_name','dct1ukpad');
     formData.append('tags',itemId);
 
-    var element = document.getElementById("progress-bar"); 
+   
 
     axios({
       url:CLOUDINARY_URL,
@@ -250,12 +243,15 @@ $(function () {
    
         $('#txt_title').val('');
         $('#txt_desc').val('');
-        tinymce.get('#txt_desc').setContent('');
+        tinymce.get('txt_desc').setContent('');
         $("img").attr('src','');
 
         $("#content_upload").fadeIn('slow');
         $("#image_upload").hide();
         $(this).hide();
+
+        element.style.width = '0%'; 
+        element.innerHTML = '0%';
   });
 
   

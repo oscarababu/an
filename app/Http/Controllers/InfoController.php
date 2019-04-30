@@ -14,16 +14,15 @@ class InfoController extends Controller
 {
     public function page($page)
     {
-        
         $res_page = Pages::where('page', 'like', '%' . str_replace('-',' ',$page . '%'))->first();
         if($res_page){
-            echo $res_page->id;
+            
             $res = DB::table('gallery')->join('images','gallery.id','=','images.cont_id')->where('images.type','full_image')->where('gallery.page', 'like', '%' . $res_page->id . '%')->get();
 
             $menu = Pages::where('top_link',1)->orderBy('page_order')->get();
             $links = Pages::where('in_page_link',1)->orderBy('page_order')->get();
             
-            return view('info')->with(['menu'=>$menu])->with(['links'=>$links])->with(['items'=>$res]);
+            return view('info')->with(['menu'=>$menu])->with(['links'=>$links])->with(['items'=>$res])->with(['current_page'=>'information'])->with(['page'=>Pages::find($res_page->id)]);
 
         }else{
             abort(404);

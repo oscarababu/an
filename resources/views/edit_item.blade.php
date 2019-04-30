@@ -72,7 +72,9 @@
                     selector: 'textarea',  // change this value according to your HTML
                     toolbar: 'undo redo | styleselect | bold italic | link image',
                     plugins: "link",
-                    }
+                    formats: {bold: { inline: 'span', styles: { fontWeight: 'bold' } }}
+
+                }
             );</script>
 
             <!--

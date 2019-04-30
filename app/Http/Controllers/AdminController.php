@@ -21,6 +21,12 @@ class AdminController extends Controller
         return view('page_management');
     }
 
+    public function back_management()
+    {
+        $res = Images::where('type','full_image')->get();
+        return view('back_management')->with(['images'=>$res]);
+    }
+
     public function new_information_page()
     {
         $pages = Pages::where('type','Information')->get();
@@ -60,6 +66,16 @@ class AdminController extends Controller
     {
         $g = Gallery::find($id);
         return view('edit_gallery_item')->with(['items'=>$g]);
+    }
+
+    public function update_back_images(Request $request){
+        foreach($request->images_arr as $i=>$val){
+            if(!empty($val)){
+                $up = Images::find($i);
+                $up->background = $val;
+                $up->save();
+            }
+        }
     }
 
     public function upload_test()

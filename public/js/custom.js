@@ -1,14 +1,24 @@
+var LOCAL_URL = 'http://127.0.0.1:8000/';
+
 window.addEventListener('load', function() {
-    update();
+    
+    axios({
+      url:LOCAL_URL+'gen_images',
+      method:'POST',
+    }).then(function(res){
+      //console.log(res.data);
+        var img_url = res.data.background;
+        update(img_url);
+    }).catch(function(err){
+      console.log(err);
+    });
 });
 
 
-function update() { 
+function update(url) { 
 
-    $progress = document.querySelector('#progressHold');
+    $progress = document.querySelector('#progress_bar');
 
-    var url = 'https://images.unsplash.com/photo-1536522147990-430415457f34?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1534&q=80';
-    
     var request = new XMLHttpRequest();
     request.onprogress = onProgress;
     request.onload = onComplete;
@@ -33,7 +43,8 @@ function update() {
       var $img = document.createElement('img');
       //$img.setAttribute('src', url);
       $progress.appendChild($img);
-      console.log('complete', url);
+      //console.log('complete', url);
+      document.getElementById("item_img").src = url;
     }
     
     function onError(event) {
