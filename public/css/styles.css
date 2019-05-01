@@ -11,8 +11,7 @@ html, body {
 }
 
 .full-height{
-    min-height: 94vh;
-    height:auto;
+    height: 94vh;
     background: #adadad;
 }
 
@@ -115,14 +114,7 @@ html, body {
     position:absolute;
     z-index:1;
 }
-.in-page-wrapper{
-    width: 18%;
-    height: 300px;
-    right:150px;
-    top:150px;
-    position:absolute;
-    z-index:0;
-}
+
 .in-page-wrapper a{
     text-decoration:none;
     color:black;
@@ -368,6 +360,13 @@ html, body {
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
 
+    
+    .full-height{
+        min-height: 94vh;
+        height:auto;
+        background: #adadad;
+    }
+
     .in-page-wrapper{
         width: 80%;
         height: 300px;
@@ -442,7 +441,7 @@ html, body {
     }
     .menu{
         width: 100%;
-        height:5.5vh;
+        height:6vh;
         background: black;
     }
     .load-bar{
@@ -514,148 +513,7 @@ html, body {
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
 
-    .in-page-wrapper{
-        width: 80%;
-        height: 300px;
-        left: 0; 
-        right: 0; 
-        margin-left: auto; 
-        margin-right: auto; 
-        top:150px;
-        position:absolute;
-        z-index:0;
-    }
-
-    #item_img{
-        display:none;
-    }
-
-    .menu-wrapper{
-        display:none;
-    }
-
-    .thumb-nail{
-        width:98%;
-        height:auto;
-        margin:5px;
-        cursor:pointer;
-        position:relative;
-    }
-
-    .full-height-gallery{
-        min-height: 94vh;
-        width:100%;
-        background: #adadad;
-        overflow:hidden;
-        position: relative;
-    }
-    .plus,.title_tag{
-        display:block;
-    }
-    .burger{
-        width:10%;
-        height:90%;
-        margin:7px;
-        float:right;
-        cursor: pointer;
-    }
-    .burger-slice{
-        width:100%;
-        height:5px;
-        margin-top:5px;
-        background: white;
-    }
-    .burger-menu{
-        width:100%;
-        top:41px;
-        position:absolute;
-        height:auto;
-        min-height:100px;
-        margin-top:5px;
-        background: black;
-        z-index:1;
-        color:white;
-        font-size:20px;
-        display:none;
-    }
-    .burger-menu li{
-        list-style:none;
-        margin:5px;
-    }
-    .burger-menu a{
-        color:white;
-        text-decoration: none;
-    }
-    .menu{
-        width: 100%;
-        height:5.5vh;
-        background: black;
-    }
-    .load-bar{
-        width: 100%;
-        height:1vh;
-        background: black;
-        margin-top:-1px;
-        position:absolute;
-        z-index:1;
-    }
-
-    .info_linx{
-        background-image:url('../images/opacity.png');
-        width:93%;
-        left: 0; 
-        right: 0; 
-        top:42%;
-        margin-left: auto; 
-        margin-right: auto; 
-        position:absolute;
-        min-height: 190px; 
-    }
-
-    .info_large_content{
-        background-image:url('../images/opacity.png');
-        width:93%;
-        left: 0; 
-        right: 0; 
-        top:42%;
-        margin-left: auto; 
-        margin-right: auto; 
-        position:absolute;
-        min-height: 190px; 
-    }
-
-    #item_img{
-        width: auto;
-        height : auto;
-        max-height: 100%;
-        max-width: 100%;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .linx{
-        background-image:url('../images/opacity.png');
-        padding-top: 1%;
-        padding-bottom: 10px;
-        margin-bottom: 3%;
-        padding-left: 5px;
-        padding-right: 10px;
-        text-align:center;
-        cursor:move;
-        color: black;
-        width: 94%;
-        height: auto;
-        overflow:hidden;
-        position:absolute;
-        top: 52%;
-        left: 0; 
-        right: 0; 
-        margin-left: auto; 
-        margin-right: auto; 
-        z-index:0;
-    }
-
+   
 } 
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -665,12 +523,57 @@ html, body {
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+    .burger{
+        display:none;
+    }
+    .menu-wrapper{
+        display:block;
+    }
+    .in-page-wrapper{
+        width: 18%;
+        height: 300px;
+        right:15px;
+        top:150px;
+        position:absolute;
+        z-index:0;
+    }
 
+    .thumb-nail{
+        width:49%;
+        height:auto;
+        float:left;
+        margin:5px;
+        cursor:pointer;
+        position:relative;
+    }
+
+    .info_linx{
+        background-image:url('../images/opacity.png');
+        width:380px;
+        min-height: 190px;
+        right:40px;
+        top:55px;
+        position:absolute;
+        
+    }
+    .burger{
+        display:none;
+    }
+    .burger-menu{
+        display:none;
+    }
 } 
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-
+    .in-page-wrapper{
+        width: 18%;
+        height: 300px;
+        right:150px;
+        top:150px;
+        position:absolute;
+        z-index:0;
+    }
 }
 
 

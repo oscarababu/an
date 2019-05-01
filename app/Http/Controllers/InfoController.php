@@ -29,11 +29,6 @@ class InfoController extends Controller
         }
     }
 
-    public function login()
-    {
-        return view('login')->with(['menu'=>Pages::where('top_link',1)->orderBy('page_order')->get()]);
-    }
-
     public function create_info_item(Request $request){
         
             $first_page = ($request->firstPage) ? $request->firstPage: 0;
@@ -48,6 +43,7 @@ class InfoController extends Controller
                 $g->description = $request->desc;
                 $g->status = 0;
                 $g->page = $page;
+                $g->type = 'information';
                 $g->save();
                 $item_id = Gallery::select('id')->orderBy('id','desc')->first();
                 return array('item_id'=>$item_id->id);

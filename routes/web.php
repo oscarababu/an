@@ -21,7 +21,9 @@ Route::get('/item/{page}/{pagex}/{item}', 'GalleryController@item');
 
 Route::get('/information/{page}', 'InfoController@page');
 
-Route::get('/login', 'InfoController@login');
+Route::get('/login', 'HomeController@login');
+
+Route::post('/login_fnc', 'HomeController@login_fnc');
 
 Route::get('/new_gallery_content', 'AdminController@new_gallery_content');
 
@@ -53,6 +55,10 @@ Route::get('/edit_info_item/{id}', 'AdminController@edit_info_item');
 
 Route::get('/edit_gallery_item/{id}', 'AdminController@edit_gallery_item');
 
+Route::get('/disable_item/{id}', 'AdminController@disable_item');
+
+Route::get('/enable_item/{id}', 'AdminController@enable_item');
+
 Route::post('/pages_report_data', 'PageController@pages_report_data');
 
 Route::post('/gallery_report_data', 'PageController@gallery_report_data');
@@ -68,6 +74,8 @@ Route::post('/fetch_edit_page_data', 'PageController@fetch_edit_page_data');
 Route::post('/delete_page', 'PageController@delete_page');
 
 Route::get('/items_reports', 'AdminController@items_reports');
+
+Route::get('/info_items_reports', 'AdminController@info_items_reports');
 
 Route::get('/new_information_page', 'AdminController@new_information_page');
 

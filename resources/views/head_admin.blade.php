@@ -51,18 +51,21 @@
                     <div class="menu-link">
                         <a href="{{ url('/page_management') }}">Page Management</a>
                     </div>
-                    
+
+                    <div class="menu-link">
+                        <a href="{{ url('/items_reports') }}">Gallery Reports</a>
+                    </div>
+
+                    <div class="menu-link">
+                        <a href="{{ url('/info_items_reports') }}">Information Pages</a>
+                    </div>
+
                     <div class="menu-link">
                         <a href="{{ url('/new_information_page') }}">New Information Page</a>
                     </div>
 
                     <div class="menu-link">
                         <a href="{{ url('/new_gallery_content') }}">New Gallery Item</a>
-                    </div>
-
-
-                    <div class="menu-link">
-                        <a href="{{ url('/items_reports') }}">Items Reports</a>
                     </div>
 
                     

@@ -17,7 +17,7 @@ class GalleryController extends Controller
     {
         $res_page = Pages::where('page', 'like', '%' . str_replace('-',' ',$page . '%'))->first();
         if($res_page){
-            $res = DB::table('gallery')->join('images','gallery.id','=','images.cont_id')->where('images.type','thumbnail')->where('gallery.page', 'like', '%' . $res_page->id . '%')->orderBy('gallery.id','DESC')->get();
+            $res = DB::table('gallery')->join('images','gallery.id','=','images.cont_id')->where('images.type','thumbnail')->where('gallery.page', 'like', '%' . $res_page->id . '%')->where('gallery.status',1)->orderBy('gallery.id','DESC')->get();
             return view('gallery')->with(['pagex'=>$page])->with(['items'=>$res])->with(['menu'=>Pages::where('top_link',1)->orderBy('page_order','ASC')->get()])->with(['current_page'=>$page]);
        
         }else{
@@ -48,6 +48,7 @@ class GalleryController extends Controller
                 $g->page_link = $page_link;
                 $g->description = $request->desc;
                 $g->status = 0;
+                $g->type = 'gallery';
                 $g->page = $first_page . "_" . $second_page . "_". $third_page;
                 $g->save();
                 $item_id = Gallery::select('id')->orderBy('id','desc')->first();
@@ -151,6 +152,15 @@ class GalleryController extends Controller
 
         return $d;
 
+    }
+
+    public function update_gallery_item(Request $request){
+        $g = Gallery::find($request->id);
+        $g->title = $request->title;
+        $page_link = str_replace(" ","-",strtolower($request->title));
+        $g->page_link = $page_link;
+        $g->description = $request->desc;
+        $g->save();
     }
 
 }

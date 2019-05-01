@@ -38,6 +38,12 @@
                                 @else
                                 <input class='chk_back' id='{{$val_images->id}}' type='checkbox' />
                                 @endif
+
+                                @if(App\Gallery::find($val_images->cont_id)->type =='gallery')
+                                  {{App\Gallery::find($val_images->cont_id)->title}}
+                                @else
+                                  {{App\Pages::find(explode('_',App\Gallery::find($val_images->cont_id)->page)[0])->page}}
+                                @endif
                           </div>
                       </div>
                   </div>

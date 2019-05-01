@@ -1,12 +1,9 @@
 
 3. Random background images on the information landing page.
 4. Order site links.
-
-7. Disable pages.
 9. Add newsletter plugin.
 10. Stretch cropped images for backgrounds.
-11. Login and admin control.
-17. Restrict full Image upload.
+
 
 
 
@@ -31,4 +28,9 @@
 2. Manage random background images.
 18. Tinymce not saving bold styling.
 16. Mobile responsiveness.
+7. Disable pages.
+
+1/5/2019
+
+11. Login and admin control.
 

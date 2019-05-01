@@ -39,6 +39,39 @@ $(function () {
   var LOCAL_URL = 'http://127.0.0.1:8000/';    
 
 
+  $("#update_gallery_item").click(function(){
+      var desc = tinyMCE.get('txt_desc').getContent();
+      var title = $('#txt_title').val();
+      var id = $('#hdn_id').val();
+      if(desc !="" && title !=""){
+
+      axios({
+        url:LOCAL_URL+'update_gallery_item',
+        method:'POST',
+        data: {"id":id,"desc":desc,"title":title}
+      }).then(function(res){
+        if(res.status =="200"){
+          $(".msg").html(
+            "<div class='alert alert-success' role='alert'>"+
+            "Success: Item Saved"+
+            "</div>"
+          );
+          
+        }
+        
+      }).catch(function(err){
+        console.log(err);
+      });
+
+      }else{
+        $('.msg').html(
+        "<div class='alert alert-danger' role='alert'>"+
+        "Error: Description Empty "+
+        "</div>"
+        );
+      }
+  });
+
   $("#update_info_item").click(function(){
        var desc = tinyMCE.get('txt_desc').getContent();
        var id = $('#hdn_id').val();

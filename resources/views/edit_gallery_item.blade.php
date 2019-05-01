@@ -20,14 +20,18 @@
                     <div class="col" >
                         <input type="hidden" id="hdn_id" value="{{$items->id}}" />
                         <div class="form-group">
-                            <label for="title">Description</label>
+                            <label for="title">Title</label>
+                            <input type='text' id="txt_title" class="form-control" rows="7" value="{{$items->title}}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
                             <textarea id="txt_desc" rel="Descrpition" class="form-control" rows="7">{{$items->description}}</textarea>
                         </div>
 
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <input type="button" id="update_info_item" class="btn btn-primary btn-lg float-right" value="Edit" />
+                                    <input type="button" id="update_gallery_item" class="btn btn-primary btn-lg float-right" value="Edit" />
                                 </div>
                             </div>
                         </div>
